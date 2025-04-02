@@ -89,7 +89,7 @@ def get_avgs():
     avg_mem = [avg_mem_lightGBM, avg_mem_pytorch, avg_mem_scikit, avg_mem_tensorflow, avg_mem_xgbost]
     avg_energy = [avg_energy_lightGBM, avg_energy_pytorch, avg_energy_scikit, avg_energy_tensorflow, avg_energy_xgbost]
     avg_time = [avg_time_lightGBM, avg_time_pytorch, avg_time_scikit, avg_time_tensorflow, avg_time_xgbost]
-    avg_acc = [0.9540, 0.4981, 0.8210, 0.8185, 0.9170]
+    avg_acc = [0.9540, 0.7910, 0.8210, 0.8145, 0.8200]
     
     return avg_mem, avg_energy, avg_time, avg_acc
 
@@ -130,8 +130,8 @@ def calc_score(lib_names, scores, weights):
     return nutris
 
 def create_nutris():
-    #lib_names = ["lightgbm", "pytorch", "scikit-learn", "tensorflow", "xgboost"]
-    lib_names = ["lightgbm", "pytorch", "scikit-learn", "tensorflow"]
+    lib_names = ["lightgbm", "pytorch", "scikit-learn", "tensorflow", "xgboost"]
+
     scores_mem, scores_energy, scores_time, scores_acc = get_avgs()
     abst, inst, prs, issues, vulns = get_code_metrics(lib_names, "github-metrics.json")
 

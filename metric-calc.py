@@ -42,12 +42,6 @@ def calc_component_score(scores, higher_is_better=False):
     return scoresdist
 
 def get_avgs():
-    built_inFiles = './data/Sorting/Built_in/built_in'
-    built_inSummary = './data/Sorting/Built_in/built_in.csv'
-    built_inDF = load_files(built_inFiles)
-    built_inSmry = load_eb_output(built_inSummary)
-    avg_mem_built_in = get_avg_mem(built_inDF)
-    avg_energy_built_in, avg_time_built_in = get_avg_eb(built_inSmry)
 
     numpyFiles = './data/sorting/Np/numpy'
     numpySummary = './data/sorting/Np/numpy.csv'
@@ -64,9 +58,23 @@ def get_avgs():
     avg_mem_pandas = get_avg_mem(pandasDF)
     avg_energy_pandas, avg_time_pandas = get_avg_eb(pandasSmry)
 
-    avg_mem = [avg_mem_built_in, avg_mem_numpy, avg_mem_pandas]
-    avg_energy = [avg_energy_built_in, avg_energy_numpy, avg_energy_pandas]
-    avg_time = [avg_time_built_in, avg_time_numpy, avg_time_pandas]
+    PytorchFiles = './data/sorting/PyTorch/Pytorch'
+    PytorchSummary = './data/sorting/PyTorch/Pytorch.csv'
+    PytorchDF = load_files(PytorchFiles)
+    PytorchSmry = load_eb_output(PytorchSummary)
+    avg_mem_pytorch = get_avg_mem(PytorchDF)
+    avg_energy_pytorch, avg_time_pytorch = get_avg_eb(PytorchSmry)
+
+    TensorflowFiles = './data/sorting/TensorFlow/tensorflow'
+    TensorflowSummary = './data/sorting/TensorFlow/tensorflow.csv'
+    TensorflowDF = load_files(TensorflowFiles)
+    TensorflowSmry = load_eb_output(TensorflowSummary)
+    avg_mem_tensorflow = get_avg_mem(TensorflowDF)
+    avg_energy_tensorflow, avg_time_tensorflow = get_avg_eb(TensorflowSmry)
+
+    avg_mem = [avg_mem_numpy, avg_mem_pandas, avg_mem_pytorch, avg_mem_tensorflow]
+    avg_energy = [avg_energy_numpy, avg_energy_pandas, avg_energy_pytorch, avg_energy_tensorflow]
+    avg_time = [avg_time_numpy, avg_time_pandas, avg_time_pytorch, avg_time_tensorflow]
 
     return avg_mem, avg_energy, avg_time
 
@@ -107,7 +115,7 @@ def calc_score(lib_names, scores, weights):
     return nutris
 
 def create_nutris():
-    lib_names = ["built_in","numpy", "pandas"]
+    lib_names = ['numpy', 'pandas', 'pytorch', 'tensorflow']
     scores_mem, scores_energy, scores_time = get_avgs()
     abst, inst, prs, issues, vulns = get_code_metrics(lib_names, "github-metrics.json")
 
